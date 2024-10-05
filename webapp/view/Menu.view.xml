@@ -1,0 +1,24 @@
+<mvc:View
+	controllerName="com.game.toep.controller.Menu"
+	displayBlock="true"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+	core:require="{
+		formatter: 'com/game/toep/model/formatter'
+	}">
+
+	<VBox height="100%" width="100%" alignItems="Center" justifyContent="Center">
+        <Title
+            titleStyle="H1"
+            text="{i18n>appTitle}"
+            textAlign="Center"
+            class="sapUiLargeMarginBottom cursive"
+        />
+		<Button text="{i18n>continue}" enabled="false" width="300px" icon="sap-icon://media-play" press=".onPressContinue"/>
+        <Button text="{i18n>newGame}" width="300px" icon="sap-icon://add" press=".onPressNewGame"/>
+        <Button text="{i18n>tutorial}" width="300px" icon="sap-icon://learning-assistant" press=".onPressTutorial"/>
+        <Button text="{i18n>credits}" width="300px" icon="sap-icon://group" press=".onPressCredits"/>
+        <Text text="{i18n>builtInUI5}" class="sapUiLargeMarginTop"/>
+	</VBox>
+</mvc:View>

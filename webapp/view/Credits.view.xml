@@ -1,0 +1,19 @@
+<mvc:View
+	controllerName="com.game.toep.controller.Credits"
+	displayBlock="true"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+	core:require="{
+		formatter: 'com/game/toep/model/formatter'
+	}">
+
+	<VBox height="100%" width="100%" alignItems="Center" justifyContent="Center">
+        <Title
+            titleStyle="H1"
+            text="{i18n>credits}"
+            textAlign="Center"
+            class="sapUiLargeMarginBottom cursive"
+        />
+	</VBox>
+</mvc:View>

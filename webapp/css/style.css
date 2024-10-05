@@ -1,0 +1,14 @@
+/* Focus styling is important for accessibilty. This is a game. Don't try this at home. */
+:focus {
+    outline-style: none !important ;
+}
+
+.cursive.sapMTitle {
+    font-family: 'Brush Script MT', cursive !important;
+  }
+
+.rotate {
+    transition-duration: 1s;
+    transition-property: transform;
+    transform: rotate(15deg);
+}
