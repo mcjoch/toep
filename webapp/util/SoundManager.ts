@@ -1,3 +1,8 @@
+
+
+/**
+ * @namespace com.game.toep.util
+ */
 class SoundManagerClass {
 
     private _currentMusicKey: string;

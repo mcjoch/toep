@@ -1,0 +1,23 @@
+{
+    "tables": [
+        {
+            "key": 1,
+            "title": "Beginner",
+            "subtitle": "The journey begins",
+            "minimum": 1
+        },
+        {
+            "key": 2,
+            "title": "Intermediate",
+            "subtitle": "The road to mastery",
+            "minimum": 5
+        },
+        {
+            "key": 3,
+            "title": "Advanced",
+            "subtitle": "Where legends are made",
+            "minimum": 20
+        }
+
+    ]
+}
