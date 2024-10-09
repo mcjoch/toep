@@ -1,8 +1,9 @@
+import Card from "./Card";
+
 /**
  * @namespace com.game.toep.util.game
  */
-
-class Deck {
+export default class Deck {
 
     private cards: Array<Card>;
 

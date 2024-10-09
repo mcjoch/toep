@@ -1,8 +1,10 @@
+import Card from "./Card";
+import Hand from "./Hand";
+
 /**
  * @namespace com.game.toep.util.game
  */
-
-abstract class BasePlayer {
+export default abstract class BasePlayer {
 
     protected hand: Hand;
 

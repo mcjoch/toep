@@ -5,5 +5,8 @@ import BaseController from "./BaseController";
  */
 export default class SelectLevel extends BaseController {
 
+    onPressStart() {
+        this.getRouter().navTo("game");
+    }
 
 }

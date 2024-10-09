@@ -1,7 +1,10 @@
+import BasePlayer from "./BasePlayer";
+import Card from "./Card";
+
 /**
  * @namespace com.game.toep.util.game
  */
-class AIPlayer extends BasePlayer {
+export default class AIPlayer extends BasePlayer {
    
     private AI: AIInterface;
 

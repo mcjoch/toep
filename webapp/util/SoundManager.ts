@@ -3,7 +3,7 @@
 /**
  * @namespace com.game.toep.util
  */
-class SoundManagerClass {
+export default class SoundManagerClass {
 
     private _currentMusicKey: string;
     private _currentMusicAudio: HTMLAudioElement;

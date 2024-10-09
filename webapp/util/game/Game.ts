@@ -1,8 +1,11 @@
+import BasePlayer from "./BasePlayer";
+import Deck from "./Deck";
+import HumanPlayer from "./HumanPlayer";
+
 /**
  * @namespace com.game.toep.util.game
  */
-
-class Game {
+export default class Game {
 
     private players: Array<BasePlayer>;
     private deck: Deck;

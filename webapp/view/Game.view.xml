@@ -2,18 +2,59 @@
 	controllerName="com.game.toep.controller.Game"
 	displayBlock="true"
 	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:core="sap.ui.core"
+	xmlns:toep="com.game.toep.controls"
 	core:require="{
 		formatter: 'com/game/toep/model/formatter'
 	}">
 
-	<VBox height="100%" width="100%" alignItems="Center" justifyContent="Center">
-        <Title
-            titleStyle="H1"
-            text="{i18n>game}"
-            textAlign="Center"
-            class="sapUiLargeMarginBottom cursive"
-        />
-	</VBox>
+       <l:FixFlex fixFirst="false">
+			<l:flexContent>
+				<VBox alignItems="Center" alignContent="Center" width="100%">
+					<HBox class="sapUiSmallMarginTop">
+						<VBox alignItems="Center" class="sapUiSmallMarginBeginEnd">
+							<Avatar
+								enabled="false"
+								initials="PI"
+								backgroundColor="Accent1"
+								badgeIcon="sap-icon://message-popup"
+								showBorder="true"
+								
+								displaySize="XL"
+								press="onPress"/>
+							<HBox>
+								<Button text="1" type="Emphasized" class="" />
+								<Button text="1" type="Emphasized" class="" />
+							</HBox>
+							<Text
+								text="Disabled"
+								class="sapUiTinyMarginTop"/>
+						</VBox>
+						<VBox alignItems="Center">
+							<Avatar
+								enabled="false"
+								backgroundColor="Accent2"
+								initials="PI"
+								displaySize="XL"
+								press="onPress"/>
+							<Text
+								text="Disabled"
+								class="sapUiTinyMarginTop"/>
+						</VBox>
+					</HBox>
+				</VBox>
+			</l:flexContent>
+			<l:fixContent>
+				<VBox alignItems="Center" height="300px">
+					<HBox>
+						<toep:CardControl suit="hearts" value="7"/>
+						<toep:CardControl suit="spades" value="10"/>
+					</HBox>
+					<Text text="player hand"/>
+				</VBox>
+			</l:fixContent>
+		</l:FixFlex>
+       
 </mvc:View>
