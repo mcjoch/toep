@@ -8,7 +8,7 @@
 		formatter: 'com/game/toep/model/formatter'
 	}">
 
-	<VBox height="100%" width="100%" alignItems="Center" justifyContent="Center">
+	<VBox height="100%" width="100%" alignItems="Center" justifyContent="Center" class="splashScreen">
 
 		<HBox height="50px" class="sapUiLargeMarginBottom">
 			<Title

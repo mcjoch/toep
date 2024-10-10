@@ -8,17 +8,8 @@ export default {
 
     render(oRm: RenderManager, oControl: CardControl): void {
         oRm.openStart("div", oControl);
-            oRm.class("card");
+            oRm.class("minicard");
             oRm.class(oControl.getColor());
-            oRm.openEnd();
-
-            oRm.text(oControl.getValue());
-            oRm.write("<br>");
-
-            oRm.openStart("div", oControl);
-            oRm.class("symbol");
-            oRm.openEnd();
-            oRm.text(oControl.getSymbol());
-        oRm.close("div");
+        oRm.openEnd();
     }
 }

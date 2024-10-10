@@ -24,9 +24,11 @@
 									showBorder="true"
 									displaySize="{= ${device>/system/phone} ? 'M' : 'XL'}"
 									press="onPress"/>
-								<HBox>
-									<Button text="1" type="Emphasized" class="" />
-									<Button text="1" type="Emphasized" class="" />
+								<HBox class="cardsInHand">
+									<toep:MiniCardControl color="Accent1"/>
+									<toep:MiniCardControl color="Accent1"/>
+									<toep:MiniCardControl color="Accent1"/>
+									<toep:MiniCardControl color="Accent1"/>
 								</HBox>
 								<Text
 									text="{game>name}"

@@ -1,3 +1,4 @@
+import { StorageManager } from "../StorageManager";
 import AIPlayer from "./AIPlayer";
 import BasePlayer from "./BasePlayer";
 import Deck from "./Deck";
@@ -20,7 +21,7 @@ export default class Game {
     }
 
     public setup () {
-        this.players.push(new HumanPlayer("Player 1"));
+        this.players.push(new HumanPlayer(StorageManager.get("player_name")));
         this.players.push(new AIPlayer("Player 2"));
         this.players.push(new AIPlayer("Player 3"));
         this.players.push(new AIPlayer("Player 4"));
