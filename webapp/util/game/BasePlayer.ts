@@ -1,14 +1,18 @@
+import BaseObject from "sap/ui/base/Object";
 import Card from "./Card";
 import Hand from "./Hand";
 
 /**
  * @namespace com.game.toep.util.game
  */
-export default abstract class BasePlayer {
+export default class BasePlayer extends BaseObject{
 
-    protected hand: Hand;
+    public hand: Hand;
+    public name: string;
 
-    public constructor() {
+    public constructor(playerName: string) {
+        super();
+        this.name = playerName;
         this.hand = new Hand();
     }
 
@@ -16,6 +20,6 @@ export default abstract class BasePlayer {
         return this.hand;
     }
 
-    abstract pickCardToPlay(): Promise<Card>;
+    //abstract pickCardToPlay(): Promise<Card>;
 
 }

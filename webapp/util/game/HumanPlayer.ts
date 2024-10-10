@@ -6,6 +6,10 @@ import Card from "./Card";
  */
 export default class HumanPlayer extends BasePlayer {
 
+    constructor(playerName: string) {
+        super(playerName);
+    }
+
     pickCardToPlay(): Promise<Card> {
         throw new Error("Method not implemented.");
     }

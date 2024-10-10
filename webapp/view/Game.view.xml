@@ -13,36 +13,26 @@
        <l:FixFlex fixFirst="false">
 			<l:flexContent>
 				<VBox alignItems="Center" alignContent="Center" width="100%">
-					<HBox class="sapUiSmallMarginTop">
-						<VBox alignItems="Center" class="sapUiSmallMarginBeginEnd">
-							<Avatar
-								enabled="false"
-								initials="PI"
-								backgroundColor="Accent1"
-								badgeIcon="sap-icon://message-popup"
-								showBorder="true"
-								
-								displaySize="XL"
-								press="onPress"/>
-							<HBox>
-								<Button text="1" type="Emphasized" class="" />
-								<Button text="1" type="Emphasized" class="" />
-							</HBox>
-							<Text
-								text="Disabled"
-								class="sapUiTinyMarginTop"/>
-						</VBox>
-						<VBox alignItems="Center">
-							<Avatar
-								enabled="false"
-								backgroundColor="Accent2"
-								initials="PI"
-								displaySize="XL"
-								press="onPress"/>
-							<Text
-								text="Disabled"
-								class="sapUiTinyMarginTop"/>
-						</VBox>
+					<HBox class="sapUiSmallMarginTop" items="{game>/players}">
+						<items>
+							<VBox alignItems="Center" class="sapUiSmallMarginBeginEnd">
+								<Avatar
+									enabled="false"
+									backgroundColor="Accent1"
+									fallbackIcon="sap-icon://person-placeholder"
+									badgeIcon="sap-icon://message-popup"
+									showBorder="true"
+									displaySize="{= ${device>/system/phone} ? 'M' : 'XL'}"
+									press="onPress"/>
+								<HBox>
+									<Button text="1" type="Emphasized" class="" />
+									<Button text="1" type="Emphasized" class="" />
+								</HBox>
+								<Text
+									text="{game>name}"
+									class="sapUiTinyMarginTop"/>
+							</VBox>
+						</items>
 					</HBox>
 				</VBox>
 			</l:flexContent>

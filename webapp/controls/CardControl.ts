@@ -1,12 +1,11 @@
 import Control from "sap/ui/core/Control";
-import Card from "../util/game/Card";
-import RenderManager from "sap/ui/core/RenderManager";
 import type { MetadataOptions } from "sap/ui/core/Element";
+import CardControlRenderer from "./CardControlRenderer";
 
 /**
  * @namespace com.game.toep.controls
  */
-class CardControl extends Control {
+export default class CardControl extends Control {
 
     static readonly metadata: MetadataOptions = {
 
@@ -34,12 +33,6 @@ class CardControl extends Control {
             draggable: true,
             droppable: false
         }
-    }
-
-   
-
-    public init(): void {
-        //
     }
 
     public onclick(): void {
@@ -70,32 +63,14 @@ class CardControl extends Control {
         }
     }
 
-    private getSuit(): string {
+    public getSuit(): string {
         return this.getProperty("suit") as string;
     }
 
-    private getValue(): string {
+    public getValue(): string {
         return this.getProperty("value") as string;
     }
 
-    public renderer(oRm: RenderManager, oControl: CardControl): void {
-        //
-        oRm.openStart("div", oControl);
-            oRm.class("card");
-            oRm.class(oControl.getColor());
-        oRm.openEnd();
+    static renderer: typeof CardControlRenderer = CardControlRenderer;
 
-        oRm.text(oControl.getValue());
-        oRm.write("<br>");
-
-        oRm.openStart("div", oControl);
-            oRm.class("symbol");
-        oRm.openEnd();
-            oRm.text(oControl.getSymbol());
-        oRm.close("div");
-
-
-
-
-    }
 }

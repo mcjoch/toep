@@ -8,8 +8,8 @@ export default class AIPlayer extends BasePlayer {
    
     private AI: AIInterface;
 
-    public constructor() {
-        super();
+    public constructor(playerName: string) {
+        super(playerName);
     }
 
     pickCardToPlay(): Promise<Card> {
