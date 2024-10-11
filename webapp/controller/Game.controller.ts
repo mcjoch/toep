@@ -1,6 +1,7 @@
 import JSONModel from "sap/ui/model/json/JSONModel";
 import BaseController from "./BaseController";
-import GameObject from "../util/game/Game";
+import GameObject, { LevelConfig } from "../util/game/Game";
+import { Route$PatternMatchedEvent } from "sap/ui/core/routing/Route";
 
 /**
  * @namespace com.game.toep.controller
@@ -15,17 +16,20 @@ export default class Game extends BaseController {
         this.setModel(oGameModel, "game");
     }
 
-    public onRouteMatched = (): void => {
-       this.setupNewGame();
+    public onRouteMatched = (event: Route$PatternMatchedEvent): void => {
+        const args = event.getParameter("arguments") as { level: int };
+        this.setupNewGame(args.level);
     }
 
-    public setupNewGame = (): void => {
-        const oGameObject = new GameObject();
-        oGameObject.setup();
+    public setupNewGame = (level: int): void => {
+        const levelConfig = this.getConfig().getProperty("/levels/" + String(level)) as LevelConfig;
+        const gameObject = new GameObject();
 
-        const oGameModel = this.getModel("game") as JSONModel;
+        gameObject.setup();
 
-        oGameModel.setProperty("/", oGameObject);
+        const gameModel = this.getModel("game") as JSONModel;
+
+        gameModel.setProperty("/", gameObject);
     }
 
 

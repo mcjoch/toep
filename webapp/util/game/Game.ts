@@ -21,7 +21,7 @@ export default class Game {
     }
 
     public setup () {
-        this.players.push(new HumanPlayer(StorageManager.get("player_name")));
+        this.players.push(new HumanPlayer());
         this.players.push(new AIPlayer("Player 2"));
         this.players.push(new AIPlayer("Player 3"));
         this.players.push(new AIPlayer("Player 4"));
@@ -35,4 +35,13 @@ export default class Game {
        // start the game
     }
 
+}
+
+export interface LevelConfig {
+    key: number;
+    title: string,
+    subtitle: string,
+    minimumBet: number,
+    minimumToPlay: number,
+    AIDescription: string
 }

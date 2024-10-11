@@ -1,3 +1,4 @@
+import { StorageManager } from "../StorageManager";
 import BasePlayer from "./BasePlayer";
 import Card from "./Card";
 
@@ -6,8 +7,8 @@ import Card from "./Card";
  */
 export default class HumanPlayer extends BasePlayer {
 
-    constructor(playerName: string) {
-        super(playerName);
+    constructor() {
+        super(StorageManager.getName());
     }
 
     pickCardToPlay(): Promise<Card> {

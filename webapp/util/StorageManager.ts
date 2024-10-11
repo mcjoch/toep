@@ -12,13 +12,21 @@ export default class StorageManagerClass {
         this.storage = new Storage(Storage.Type.local, "toep_storage");
     }
 
-    public set(key: string, value: string): void {
-        this.storage.put(key, value);
+    public setName(name: string): void {
+        this.storage.put("player_name", name);
     }
 
-    public get(key: string): string {
-        return this.storage.get(key) as string;
+    public getName(): string {
+        return this.storage.get("player_name") as string;
     }
+
+    public setCoins(coins: int): void {
+        this.storage.put("player_coins", coins);
+    }
+    
+    public getCoins(): int {
+        return this.storage.get("player_coins") as int;
+    }   
 
 }
 

@@ -44,7 +44,13 @@ export default class Menu extends BaseController {
 		const viewModel = this.getModel("viewModel");
 		const newPlayerName = viewModel.getProperty("/newPlayerName") as string;
 
-		StorageManager.set("player_name", newPlayerName);
+		// Store the player name
+		StorageManager.setName(newPlayerName);
+
+		// Set the starter coins to 10
+		StorageManager.setCoins(10);
+
+		// Move to the level selection screen
 		this.getRouter().navTo("selectlevel");
 	}
 

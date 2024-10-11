@@ -4,19 +4,25 @@
             "key": 1,
             "title": "Novice",
             "subtitle": "The journey begins",
-            "minimum": 1
+            "minimumBet": 1,
+            "minimumToPlay": 5,
+            "AIDescription": "Opponents are beginners and will make many mistakes."
         },
         {
             "key": 2,
             "title": "Intermediate",
             "subtitle": "The road to toep mastery",
-            "minimum": 5
+            "minimumBet": 5,
+            "minimumToPlay": 20,
+            "AIDescription": "Opponents play well, but make mistakes."
         },
         {
             "key": 3,
-            "title": "Masters",
+            "title": "Master",
             "subtitle": "Where toep legends are made",
-            "minimum": 20
+            "minimumBet": 10,
+            "minimumToPlay": 100,
+            "AIDescription": "Opponents try to play optimally."
         }
 
     ]

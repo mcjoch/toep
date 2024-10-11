@@ -69,3 +69,12 @@
 .card.inactive {
 	background-color: #dedede;
 }
+
+.largeText {
+    font-size: 1.6rem;
+}
+
+.coin {
+    filter: invert(74%) sepia(86%) saturate(2627%) hue-rotate(2deg) brightness(107%) contrast(98%);
+    margin-left: 0.2rem;
+}
