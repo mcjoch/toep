@@ -20,6 +20,10 @@ export default class BasePlayer extends BaseObject{
         return this.hand;
     }
 
+    public dealCard(card: Card) {
+        this.hand.addCard(card);
+    }
+
     //abstract pickCardToPlay(): Promise<Card>;
 
 }

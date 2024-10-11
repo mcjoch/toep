@@ -2,11 +2,12 @@
 	xmlns="sap.m"
 	xmlns:core="sap.ui.core">
 	<Dialog
-		title="{i18n>selectPeriodLast3Months}"
+		title="{i18n>enterName}"
 		busyIndicatorDelay="0"
-		id="periodSelect">
-        <Label text="name"/>
+		id="periodSelect"
+		class="sapUiContentPadding">
+        <Label text="{i18n>name}:"/>
         <Input value="{viewModel>/newPlayerName}"/>
-        <Button text="Start" press=".onStartNewGame"/>
+        <Button text="{i18n>start}" press=".onStartNewGame"/>
 	</Dialog>
 </core:FragmentDefinition>

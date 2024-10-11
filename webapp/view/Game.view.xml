@@ -24,9 +24,10 @@
 									showBorder="true"
 									displaySize="{= ${device>/system/phone} ? 'M' : 'XL'}"
 									press="onPress"/>
-								<HBox class="cardsInHand">
-									<toep:MiniCardControl color=""/>
-
+								<HBox class="cardsInHand" items="{game>hand/cards}">
+									<items>
+										<toep:MiniCardControl color=""/>
+									</items>
 								</HBox>
 								<Text
 									text="{game>name}"
@@ -38,9 +39,10 @@
 			</l:flexContent>
 			<l:fixContent>
 				<VBox alignItems="Center" height="8rem">
-					<HBox>
-						<toep:CardControl suit="hearts" value="7"/>
-						<toep:CardControl suit="spades" value="10"/>
+					<HBox items="{game>/humanPlayer/hand/cards}">
+						<items>
+							<toep:CardControl suit="{game>suit}" value="{game>value}"/>
+						</items>
 					</HBox>
 				</VBox>
 			</l:fixContent>
