@@ -33,7 +33,7 @@
 					<f:content>
 						<VBox height="110px" class="sapUiSmallMargin" justifyContent="SpaceBetween">
 							<HBox>
-								<Text text="Minimum bet: {config>minimumBet}"/>
+								<Text text="Ante: {config>minimumBet}"/>
 								<Image src="img/coin.svg" width="0.9rem" class="coin"/>
 							</HBox>
 							<HBox>

@@ -22,14 +22,17 @@ export default class Game extends BaseController {
     }
 
     public setupNewGame = (level: int): void => {
-        const levelConfig = this.getConfig().getProperty("/levels/" + String(level)) as LevelConfig;
-        const gameObject = new GameObject();
+        const gameObject = new GameObject(this);
 
         gameObject.setup();
 
         const gameModel = this.getModel("game") as JSONModel;
 
         gameModel.setProperty("/", gameObject);
+    }
+
+    public modelRefresh() {
+        this.getModel("game").refresh();
     }
 
 

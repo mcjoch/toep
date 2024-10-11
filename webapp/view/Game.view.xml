@@ -9,33 +9,43 @@
 	core:require="{
 		formatter: 'com/game/toep/model/formatter'
 	}">
-
        <l:FixFlex fixFirst="false">
 			<l:flexContent>
-				<VBox alignItems="Center" alignContent="Center" width="100%">
-					<HBox class="sapUiSmallMarginTop" items="{game>/players}">
-						<items>
-							<VBox alignItems="Center" class="sapUiSmallMarginBeginEnd">
-								<Avatar
-									enabled="false"
-									backgroundColor="Accent1"
-									fallbackIcon="sap-icon://person-placeholder"
-									badgeIcon="sap-icon://message-popup"
-									showBorder="true"
-									displaySize="{= ${device>/system/phone} ? 'M' : 'XL'}"
-									press="onPress"/>
-								<HBox class="cardsInHand" items="{game>hand/cards}">
-									<items>
-										<toep:MiniCardControl color=""/>
-									</items>
-								</HBox>
-								<Text
-									text="{game>name}"
-									class="sapUiTinyMarginTop"/>
-							</VBox>
-						</items>
-					</HBox>
-				</VBox>
+				<l:FixFlex fixFirst="true">
+					<l:fixContent>
+						<VBox alignItems="Center">
+							<HBox class="sapUiSmallMarginTop" items="{ path: 'game>/players'}">
+								<items>
+									<VBox alignItems="Center" class="sapUiSmallMarginBeginEnd">
+										<Avatar
+											enabled="false"
+											backgroundColor="Accent1"
+											fallbackIcon="sap-icon://person-placeholder"
+											badgeIcon="{= ${game>/currentPlayer/id} === ${game>id} ? 'sap-icon://high-priority' : '' }"
+											showBorder="true"
+											displaySize="{= ${device>/system/phone} ? 'M' : 'XL'}"
+											press="onPress"/>
+										<HBox class="cardsInHand" items="{path: 'game>hand/cards', templateShareable:false}">
+											<items>
+												<toep:MiniCardControl color=""/>
+											</items>
+										</HBox>
+										<Text text="{game>name}" class="sapUiTinyMarginTop"/>
+									</VBox>
+								</items>
+							</HBox>
+						</VBox>
+					</l:fixContent>
+					<l:flexContent>
+						<VBox alignItems="Center" height="100%">
+							<HBox items="{game>/currentTrick/cardsPlayed}" height="100%" alignItems="Center">
+								<items>
+									<toep:CardControl suit="{game>suit}" value="{game>value}"/>
+								</items>
+							</HBox>
+						</VBox>
+					</l:flexContent>
+				</l:FixFlex>
 			</l:flexContent>
 			<l:fixContent>
 				<VBox alignItems="Center" height="8rem">
