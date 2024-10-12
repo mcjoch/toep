@@ -21,6 +21,9 @@ export default class Game {
     private controller: GameController;
     private deck: Deck;
     protected waitTime: number;
+    public coins: number;
+    public levelConfig: LevelConfig;
+    public winner: BasePlayer;
 
     /**
      * Constructor function
@@ -42,13 +45,17 @@ export default class Game {
         this.discardPile = [];
 
         // Standard wait time between tricks is 4 seconds
-        this.waitTime = 4000;
+        this.waitTime = 1000;
     }
 
     /**
      * Setup the game
      */
-    public setup () {
+    public setup (levelConfig: LevelConfig) {
+
+        // Set the level configuration
+        this.levelConfig = levelConfig;
+
         // Create a human player
         const humanPlayer = new HumanPlayer(1);
         this.humanPlayer = humanPlayer;
@@ -58,6 +65,12 @@ export default class Game {
         this.players.push(new AIPlayer(2, "Player 2"));
         this.players.push(new AIPlayer(3, "Player 3"));
         this.players.push(new AIPlayer(4, "Player 4"));
+
+        // Take the minimum bet from the player
+        StorageManager.setCoins(StorageManager.getCoins() - levelConfig.minimumBet);
+
+        // Set the pot of coins
+        this.coins = levelConfig.minimumBet * this.players.length;
 
         // Deal 4 cards to each player
         for (let i = 0; i < 4; i++) {
@@ -130,9 +143,11 @@ export default class Game {
      * Ends the turn
      */
     private endTurn() {
-        this.refreshViewModel();
         // Check if the trick has ended (e.g. there is one card played for each remaining player)
         if (this.currentTrick.cardsPlayed.length === this.getRemainingPlayers().length) {
+            this.currentTrick.markWinner();
+            this.refreshViewModel();
+
             setTimeout(() => {
                 this.endTrick();
                 this.refreshViewModel();
@@ -150,6 +165,7 @@ export default class Game {
      * Ends the trick
      */
     private endTrick() {
+
         // If this was the last trick, end the game
         if (this.currentTrick.no === 4) {
             this.endGame();
@@ -158,6 +174,11 @@ export default class Game {
         
         // Call the winner of the trick
         const trickWinner = this.currentTrick.getWinner();
+
+        // Clear the winner highlighting
+        this.players.forEach(player => {
+            player.setWinner(false);
+        });
 
         console.log(`${trickWinner.name} won trick ${this.currentTrick.no}`);
 
@@ -174,6 +195,16 @@ export default class Game {
      */
     endGame() {
         const gameWinner = this.currentTrick.getWinner();
+
+        if (gameWinner instanceof HumanPlayer) {
+            // Award the player their coins
+            StorageManager.setCoins(StorageManager.getCoins() + this.coins);
+        }
+
+        this.winner = gameWinner;
+
+        // eslint-disable-next-line @typescript-eslint/no-floating-promises
+        this.controller.openWinnerDialog();
 
         console.log(`${gameWinner.name} won the game`);
     }

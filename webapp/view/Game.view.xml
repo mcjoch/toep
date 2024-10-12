@@ -4,6 +4,7 @@
 	xmlns="sap.m"
 	xmlns:l="sap.ui.layout"
 	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:tnt="sap.tnt"
 	xmlns:core="sap.ui.core"
 	xmlns:toep="com.game.toep.controls"
 	core:require="{
@@ -13,15 +14,24 @@
 			<l:flexContent>
 				<l:FixFlex fixFirst="true">
 					<l:fixContent>
+						<Toolbar width="100%" height="2rem"> 
+							<ToolbarSpacer />
+							<FlexBox alignItems="Center" alignContent="Center">
+								<Text text="Winner gets: {game>/coins}" />
+								<Image src="img/coin.svg" width="1.4rem" height="1.4rem" class="coin headerImage"/>
+							</FlexBox>
+							<ToolbarSpacer />
+						</Toolbar>
 						<VBox alignItems="Center">
 							<HBox class="sapUiSmallMarginTop" items="{ path: 'game>/players'}">
 								<items>
 									<VBox alignItems="Center" class="sapUiSmallMarginBeginEnd">
 										<Avatar
-											enabled="false"
-											backgroundColor="Accent1"
+											enabled="{= ${game>winner} || ${game>/currentPlayer/id} === ${game>id} }"
+											backgroundColor="{= ${game>winner} ? 'Accent8' : 'Accent1' }"
 											fallbackIcon="sap-icon://person-placeholder"
-											badgeIcon="{= ${game>/currentPlayer/id} === ${game>id} ? 'sap-icon://high-priority' : '' }"
+											badgeIcon="{= ${game>winner} ? 'sap-icon://accept' : '' }"
+											badgeValueState="Information"
 											showBorder="true"
 											displaySize="{= ${device>/system/phone} ? 'M' : 'XL'}"
 											press="onPress"/>
@@ -38,9 +48,12 @@
 					</l:fixContent>
 					<l:flexContent>
 						<VBox alignItems="Center" height="100%">
-							<HBox items="{game>/currentTrick/cardsPlayed}" height="100%" alignItems="Center">
+							<HBox items="{game>/currentTrick/cardsPlayed}" height="100%" alignItems="Center" width="22rem">
 								<items>
-									<toep:CardControl suit="{game>suit}" value="{game>value}"/>
+									<VBox alignItems="Center">
+										<toep:CardControl suit="{game>suit}" value="{game>value}" winner="{game>winner}"/>
+										<Text text="{game>player/name}"/>
+									</VBox>
 								</items>
 							</HBox>
 						</VBox>
@@ -48,10 +61,13 @@
 				</l:FixFlex>
 			</l:flexContent>
 			<l:fixContent>
-				<VBox alignItems="Center" height="8rem">
+				<VBox alignItems="Center" height="10rem">
+					<HBox height="2rem" >
+						<tnt:InfoLabel text="{i18n>yourTurn}" colorScheme="6" width = "140px" visible="{= ${game>/currentPlayer/id} === ${game>/humanPlayer/id} }"/>
+					</HBox>
 					<HBox items="{game>/humanPlayer/hand/cards}">
 						<items>
-							<toep:CardControl suit="{game>suit}" value="{game>value}"/>
+							<toep:CardControl suit="{game>suit}" value="{game>value}" active="{game>active}" select="onSelectCard"/>
 						</items>
 					</HBox>
 				</VBox>

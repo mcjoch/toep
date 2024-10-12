@@ -22,7 +22,7 @@ export default class AIPlayer extends BasePlayer {
             const card = possibleCards[0];
 
              // Feign AI delay
-             this.think(1500, 2500).then(() => {
+             this.think(500, 100).then(() => {
                 
                 // Remove the card from your hand
                 this.hand.removeCard(card);

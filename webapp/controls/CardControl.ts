@@ -16,8 +16,9 @@ export default class CardControl extends Control {
             suit: {
                 type: "string"
             },
-            won: {
-                type: "boolean"
+            winner: {
+                type: "boolean",
+                defaultValue: false
             },
             active: {
                 type: "boolean",
@@ -69,6 +70,14 @@ export default class CardControl extends Control {
 
     public getValue(): string {
         return this.getProperty("value") as string;
+    }
+
+    public getActive(): boolean {
+        return this.getProperty("active") as boolean;
+    }
+
+    public getWinner(): boolean {
+        return this.getProperty("winner") as boolean;
     }
 
     static renderer: typeof CardControlRenderer = CardControlRenderer;

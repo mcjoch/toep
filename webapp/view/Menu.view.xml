@@ -15,7 +15,7 @@
             textAlign="Center"
             class="sapUiLargeMarginBottom cursive"
         />
-		<Button text="{i18n>continue}" enabled="false" width="300px" icon="sap-icon://media-play" press=".onPressContinue"/>
+		<Button text="{i18n>continue}" enabled="{viewModel>/hasExistingSession}" width="300px" icon="sap-icon://media-play" press=".onPressContinue"/>
         <Button text="{i18n>newGame}" width="300px" icon="sap-icon://add" press=".onPressNewGame"/>
         <Button text="{i18n>tutorial}" width="300px" icon="sap-icon://learning-assistant" press=".onPressTutorial"/>
         <Button text="{i18n>credits}" width="300px" icon="sap-icon://group" press=".onPressCredits"/>

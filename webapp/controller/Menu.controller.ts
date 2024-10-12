@@ -21,6 +21,7 @@ export default class Menu extends BaseController {
 	onInit(): void {
 		this.setModel(new JSONModel({
 			newPlayerName: "",
+			hasExistingSession: StorageManager.getName() !== null,
 		}), "viewModel");
 	}
 

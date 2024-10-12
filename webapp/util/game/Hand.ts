@@ -16,16 +16,28 @@ export default class Hand {
         this.cards.push(card);
     }
 
-    removeCard(card: Card) {
+    public removeCard(card: Card) {
         this.cards = this.cards.filter(c => c !== card);
     }
 
-    getLegalCards(leadingsuit: string): Array<Card> {
+    public getLegalCards(leadingsuit: string): Array<Card> {
         const cardsOfLeadingSuit = this.cards.filter(card => card.suit === leadingsuit);
         if (cardsOfLeadingSuit.length > 0) {
             return cardsOfLeadingSuit;
         }
         return this.cards;
+    }
+
+    public markLegalCards(leadingsuit: string) {
+        this.cards.forEach(card => {
+            card.active = this.getLegalCards(leadingsuit).includes(card);
+        });
+    }
+
+    public disableAllCards() {
+        this.cards.forEach(card => {
+            card.active = false;
+        });
     }
 
 }

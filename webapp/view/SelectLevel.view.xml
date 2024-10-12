@@ -24,7 +24,7 @@
 			<Image src="img/coin.svg" width="1.7rem" class="coin"/>
 
 		</HBox>
-		<Carousel ariaLabelledBy="carouselTitle" width="350px" class="sapUiContentPadding" arrowsPlacement="PageIndicator" pages="{config>/tables}">
+		<Carousel ariaLabelledBy="carouselTitle" width="350px" class="sapUiContentPadding" arrowsPlacement="PageIndicator" pages="{config>/levels}">
 			<pages>
 				<f:Card>
 					<f:header>
@@ -37,7 +37,7 @@
 								<Image src="img/coin.svg" width="0.9rem" class="coin"/>
 							</HBox>
 							<HBox>
-								<Text text="Minimum coins to play: {config>minimumToPlay}"/>
+								<Text text="Minimum coins to unlock: {config>minimumToPlay}"/>
 								<Image src="img/coin.svg" width="0.9rem" class="coin"/>
 							</HBox>
 							<Button text="{i18n>start}" type="Emphasized" press=".onPressStart" enabled="{= ${viewModel>/playerCoins} >= ${config>minimumToPlay} }"/>

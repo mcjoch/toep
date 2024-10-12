@@ -10,6 +10,15 @@ export default {
         oRm.openStart("div", oControl);
             oRm.class("card");
             oRm.class(oControl.getColor());
+
+            if (!oControl.getActive()) {
+				oRm.class("inactive");
+			}
+
+            if (oControl.getWinner()) {
+				oRm.class("winner");
+			}
+
             oRm.openEnd();
 
             oRm.text(oControl.getValue());

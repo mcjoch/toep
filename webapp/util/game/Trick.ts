@@ -19,14 +19,14 @@ export default class Trick {
         this.cardsPlayed.push(card);
     }
 
-    getLeadingSuit(): string {
+    public getLeadingSuit(): string {
         if (this.cardsPlayed.length === 0) {
             return null;
         }
         return this.cardsPlayed[0].suit;
     }
 
-    getLeadingCard(): Card {
+    public getLeadingCard(): Card {
         let winner = this.cardsPlayed[0];
         this.cardsPlayed.forEach(card => {
             if (card.beats(winner)) {
@@ -36,8 +36,16 @@ export default class Trick {
         return winner;
     }
 
-    getWinner(): BasePlayer {
-       return this.getLeadingCard().player;
+    public getWinner(): BasePlayer {
+        return this.getLeadingCard().player;
+    }
+
+    /**
+     * Mark the winning player and card
+     */
+    public markWinner() {
+        this.getLeadingCard().setWinner(true);
+        this.getWinner().setWinner(true);
     }
 
 }

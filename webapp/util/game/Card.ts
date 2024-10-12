@@ -8,11 +8,15 @@ export default class Card {
 
     suit: string;
     value: string;
-    player: BasePlayer
+    winner: boolean;
+    player: BasePlayer;
+    active: boolean;
 
     constructor(value: string, suit: string) {
         this.value = value;
         this.suit = suit;
+        this.active = false;
+        this.winner = false;
     }
 
     public getSuit(): string {
@@ -30,6 +34,10 @@ export default class Card {
     public setPlayer(player: BasePlayer) {
         this.player = player;
     }   
+
+    public setWinner(bool: boolean) {
+        this.winner = bool;
+    }
 
     /**
      * Check if this card beats the given card

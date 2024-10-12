@@ -4,7 +4,6 @@
 	<Dialog
 		title="{i18n>enterName}"
 		busyIndicatorDelay="0"
-		id="periodSelect"
 		class="sapUiContentPadding">
         <Label text="{i18n>name}:"/>
         <Input value="{viewModel>/newPlayerName}"/>

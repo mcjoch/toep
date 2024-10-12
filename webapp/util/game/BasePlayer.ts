@@ -12,6 +12,7 @@ export default abstract class BasePlayer extends BaseObject{
     public name: string;
     public id: number;
     public folded: boolean;
+    public winner: boolean;
 
     public constructor(id: number, playerName: string) {
         super();
@@ -19,6 +20,7 @@ export default abstract class BasePlayer extends BaseObject{
         this.name = playerName;
         this.hand = new Hand();
         this.folded = false;
+        this.winner = false;
     }
 
     // Getters and Setters
@@ -47,6 +49,10 @@ export default abstract class BasePlayer extends BaseObject{
     public think(min: number, max: number): Promise<void> {
         const ms = Math.floor(Math.random() * (max - min + 1) + min);
         return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    public setWinner(bool: boolean) {
+        this.winner = bool;
     }
 
     abstract pickCardToPlay(trick: Trick): Promise<Card>
