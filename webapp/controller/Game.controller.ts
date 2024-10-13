@@ -8,6 +8,7 @@ import Control from "sap/ui/core/Control";
 import BasePlayer from "../util/game/BasePlayer";
 import Fragment from "sap/ui/core/Fragment";
 import Dialog from "sap/m/Dialog";
+import { SoundManager } from "../util/SoundManager";
 
 /**
  * @namespace com.game.toep.controller
@@ -27,6 +28,7 @@ export default class Game extends BaseController {
     public onRouteMatched = (event: Route$PatternMatchedEvent): void => {
         const args = event.getParameter("arguments") as { level: int };
         this.setupNewGame(args.level);
+        SoundManager.playMusic("gameplay");
     }
 
     public setupNewGame = (level: int): void => {

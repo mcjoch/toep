@@ -1,3 +1,5 @@
+import AIInterface from "./AI/AIInterface";
+import RandomAI from "./AI/RandomAI";
 import BasePlayer from "./BasePlayer";
 import Card from "./Card";
 import Trick from "./Trick";
@@ -11,18 +13,18 @@ export default class AIPlayer extends BasePlayer {
 
     public constructor(id: number, playerName: string) {
         super(id,playerName);
+
+        // Replace with dynamic AI choice
+        this.AI = new RandomAI(this);
     }
 
     pickCardToPlay(trick: Trick): Promise<Card> {
         return new Promise((resolve, reject) => {
-            // Get the card from the user
-            const possibleCards = this.hand.getLegalCards(trick.getLeadingSuit());
-
             // Pick the first card for now
-            const card = possibleCards[0];
+            const card = this.AI.pickCardToPlay(trick);
 
              // Feign AI delay
-             this.think(500, 100).then(() => {
+             this.think(1500, 2500).then(() => {
                 
                 // Remove the card from your hand
                 this.hand.removeCard(card);

@@ -1,12 +1,7 @@
 import BaseController from "./BaseController";
-import Image from "sap/m/Image";
-import Title from "sap/m/Title";
 import Text from "sap/m/Text";
 import Button from "sap/m/Button";
-import { SoundManager } from "../util/SoundManager";
 import Dialog from "sap/m/Dialog";
-import Label from "sap/m/Label";
-import Input from "sap/m/Input";
 import JSONModel from "sap/ui/model/json/JSONModel";
 import Fragment from "sap/ui/core/Fragment";
 import { StorageManager } from "../util/StorageManager";
@@ -29,7 +24,43 @@ export default class Menu extends BaseController {
 		this.getRouter().navTo("selectlevel");
 	}
 
-	async onPressNewGame(): Promise<void> {
+	onPressNewGame(): void {
+		const hasExistingSession = !!StorageManager.getName();
+		if (hasExistingSession) {
+			const dialog = new Dialog({
+				title: "Start New Game",
+				type: "Message",
+				content: new Text({
+					text: "Starting a new game will erase your current progress. Are you sure you want to continue?"
+				}),
+				beginButton: new Button({
+					text: "Yes",
+					press: () => {
+						dialog.close();
+						// eslint-disable-next-line @typescript-eslint/no-floating-promises
+						this.openNewGameDialog();
+					}
+				}),
+				endButton: new Button({
+					text: "No",
+					press: () => {
+						dialog.close();
+					}
+				}),
+				afterClose: () => {
+					dialog.destroy();
+				}
+			});
+
+			dialog.open();
+		}
+		else {
+			// eslint-disable-next-line @typescript-eslint/no-floating-promises
+			this.openNewGameDialog();
+		}
+	}
+
+	private async openNewGameDialog(): Promise<void> {
 		this.newGameDialog ??= await Fragment.load({
             id: this.getView().getId(),
             name: "com.game.toep.view.NewGameDialog",

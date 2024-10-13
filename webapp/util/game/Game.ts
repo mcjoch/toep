@@ -6,6 +6,7 @@ import Deck from "./Deck";
 import HumanPlayer from "./HumanPlayer";
 import {default as GameController} from "../../controller/Game.controller";
 import Trick from "./Trick";
+import { SoundManager } from "../SoundManager";
 
 /**
  * @namespace com.game.toep.util.game
@@ -45,7 +46,7 @@ export default class Game {
         this.discardPile = [];
 
         // Standard wait time between tricks is 4 seconds
-        this.waitTime = 1000;
+        this.waitTime = 4000;
     }
 
     /**
@@ -131,6 +132,8 @@ export default class Game {
      */
     private playCard(card: Card) {
         console.log(`${this.currentPlayer.name} played ${card.getValue()}-${card.getSuit()}`);
+
+        SoundManager.playCardSound();
 
         // Add the card to the current trick
         this.currentTrick.addCard(card);

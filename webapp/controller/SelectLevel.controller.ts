@@ -4,6 +4,7 @@ import { StorageManager } from "../util/StorageManager";
 import Event from "sap/ui/base/Event";
 import Control from "sap/ui/core/Control";
 import { LevelConfig } from "../util/game/Game";
+import { SoundManager } from "../util/SoundManager";
 
 /**
  * @namespace com.game.toep.controller
@@ -27,6 +28,8 @@ export default class SelectLevel extends BaseController {
         // Read the player name and coins from the storage and set them on the view model
         viewModel.setProperty("/playerName", StorageManager.getName());
         viewModel.setProperty("/playerCoins", StorageManager.getCoins());
+
+        SoundManager.playMusic("intro");
      }
 
     onPressStart(oEvent: Event): void {
