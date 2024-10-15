@@ -12,6 +12,15 @@ export default class Main extends BaseController {
 
 	splashClicked: boolean;
 
+	onInit(): void {
+		void setTimeout(() => {
+			if (!this.splashClicked) {
+				const clickCards = this.byId("clickCards") as Text;
+				clickCards.setVisible(true);
+			}
+		}, 4000);
+	}
+
 	public onPressSplash(): void {
 
 		// Prevent multiple clicks
@@ -20,6 +29,10 @@ export default class Main extends BaseController {
 		}
 
 		this.splashClicked = true;
+
+		// Always hide the click hint
+		const clickCards = this.byId("clickCards") as Text;
+		clickCards.setVisible(false);
 
 		// Rotate logo on click
 		const svgElement = this.byId("splashLogo") as Image;

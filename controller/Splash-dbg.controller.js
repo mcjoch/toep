@@ -12,12 +12,24 @@ sap.ui.define(["./BaseController", "../util/SoundManager"], function (__BaseCont
    * @namespace com.game.toep.controller
    */
   const Main = BaseController.extend("com.game.toep.controller.Main", {
+    onInit: function _onInit() {
+      void setTimeout(() => {
+        if (!this.splashClicked) {
+          const clickCards = this.byId("clickCards");
+          clickCards.setVisible(true);
+        }
+      }, 4000);
+    },
     onPressSplash: function _onPressSplash() {
       // Prevent multiple clicks
       if (this.splashClicked) {
         return;
       }
       this.splashClicked = true;
+
+      // Always hide the click hint
+      const clickCards = this.byId("clickCards");
+      clickCards.setVisible(false);
 
       // Rotate logo on click
       const svgElement = this.byId("splashLogo");

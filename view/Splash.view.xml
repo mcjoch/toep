@@ -31,6 +31,14 @@
 		/>
 		<VBox height="100px" alignItems="Center">
 			<Text
+				id="clickCards"
+				text="{i18n>clickCardsToGetStarted}"
+				textAlign="Center"
+				wrapping="true"
+				width="100%"
+				visible="false"
+			/>
+			<Text
 				id="appDescription"
 				text="{i18n>appDescription}"
 				textAlign="Center"
