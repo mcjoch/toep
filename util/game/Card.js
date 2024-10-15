@@ -1,0 +1,2 @@
+"use strict";sap.ui.define([],function(){"use strict";class e{constructor(e,t){this.value=e;this.suit=t;this.active=false;this.winner=false}getSuit(){return this.suit}getValue(){return this.value}getNumericValue(){return["J","Q","K","A","7","8","9","10"].indexOf(this.value)}setPlayer(e){this.player=e}setWinner(e){this.winner=e}beats(e){if(this.suit===e.suit){return this.getNumericValue()>e.getNumericValue()}else{return false}}}return e});
+//# sourceMappingURL=Card.js.map

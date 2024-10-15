@@ -1,0 +1,2 @@
+"use strict";sap.ui.define(["sap/ui/core/Control","./MiniCardControlRenderer"],function(e,t){"use strict";function r(e){return e&&e.__esModule&&typeof e.default!=="undefined"?e.default:e}const o=r(t);const n=e.extend("com.game.toep.controls.MiniCardControl",{renderer:o,metadata:{properties:{color:{type:"string"}},events:{select:{}},dnd:{draggable:true,droppable:false}},getColor:function e(){return this.getProperty("color")}});return n});
+//# sourceMappingURL=MiniCardControl.js.map

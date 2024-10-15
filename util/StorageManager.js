@@ -1,0 +1,2 @@
+"use strict";sap.ui.define(["sap/ui/util/Storage"],function(e){"use strict";class t{constructor(){this.storage=new e(e.Type.local,"toep_storage")}setName(e){this.storage.put("player_name",e)}getName(){return this.storage.get("player_name")}setCoins(e){this.storage.put("player_coins",e)}getCoins(){return this.storage.get("player_coins")}}const s=new t;t.StorageManager=s;return t});
+//# sourceMappingURL=StorageManager.js.map

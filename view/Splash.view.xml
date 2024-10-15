@@ -1,0 +1,53 @@
+<mvc:View
+	controllerName="com.game.toep.controller.Splash"
+	displayBlock="true"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+	core:require="{
+		formatter: 'com/game/toep/model/formatter'
+	}">
+
+	<VBox height="100%" width="100%" alignItems="Center" justifyContent="Center" class="splashScreen">
+
+		<HBox height="50px" class="sapUiLargeMarginBottom">
+			<Title
+				class="cursive"
+				id="appTitle"
+				titleStyle="H1"
+				text="{i18n>appTitle}"
+				textAlign="Center"
+				visible="false"
+			/>
+		</HBox>
+		
+		<Image
+			id="splashLogo"
+			src="img/playing-card-logo.svg"
+			width="100%"
+			densityAware="true"
+			decorative="false"
+			press=".onPressSplash"
+		/>
+		<VBox height="100px" alignItems="Center">
+			<Text
+				id="appDescription"
+				text="{i18n>appDescription}"
+				textAlign="Center"
+				wrapping="true"
+				width="100%"
+				visible="false"
+			/>
+			<Button 
+				id="startButton" 
+				text="{i18n>start}" 
+				visible="false" 
+				type="Emphasized"
+				class="sapUiTinyMarginTop"
+				press=".onPressStart"
+			/>
+		</VBox>
+
+		
+	</VBox>
+</mvc:View>

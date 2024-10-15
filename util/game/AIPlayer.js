@@ -1,0 +1,2 @@
+"use strict";sap.ui.define(["./AI/RandomAI","./BasePlayer"],function(t,e){"use strict";function n(t){return t&&t.__esModule&&typeof t.default!=="undefined"?t.default:t}const o=n(t);const c=n(e);const i=c.extend("com.game.toep.util.game.AIPlayer",{constructor:function t(e,n){c.prototype.constructor.call(this,e,n);this.AI=new o(this)},pickCardToPlay:function t(e){return new Promise((t,n)=>{const o=this.AI.pickCardToPlay(e);this.think(1500,2500).then(()=>{this.hand.removeCard(o);t(o)}).catch(t=>{n(t)})})}});return i});
+//# sourceMappingURL=AIPlayer.js.map

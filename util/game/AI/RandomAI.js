@@ -1,0 +1,2 @@
+"use strict";sap.ui.define([],function(){"use strict";class t{constructor(t){this.player=t}pickCardToPlay(t){const r=this.player.hand.getLegalCards(t.getLeadingSuit());const a=r[Math.floor(Math.random()*r.length)];return a}}return t});
+//# sourceMappingURL=RandomAI.js.map

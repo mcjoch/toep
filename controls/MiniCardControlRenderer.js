@@ -1,0 +1,2 @@
+"use strict";sap.ui.define([],function(){"use strict";var e={render(e,r){e.openStart("div",r);e.class("minicard");e.class(r.getColor());e.openEnd()}};return e});
+//# sourceMappingURL=MiniCardControlRenderer.js.map

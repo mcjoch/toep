@@ -1,0 +1,2 @@
+"use strict";sap.ui.define([],function(){"use strict";var e={render(e,t){e.openStart("div",t);e.class("card");e.class(t.getColor());if(!t.getActive()){e.class("inactive")}if(t.getWinner()){e.class("winner")}e.openEnd();e.text(t.getValue());e.write("<br>");e.openStart("div",t);e.class("symbol");e.openEnd();e.text(t.getSymbol());e.close("div")}};return e});
+//# sourceMappingURL=CardControlRenderer.js.map

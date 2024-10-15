@@ -1,0 +1,85 @@
+:focus {
+    outline-style: none !important ;
+}
+
+.cursive.sapMTitle {
+    font-family: 'Brush Script MT', cursive !important;
+  }
+
+.rotate {
+    transition-duration: 1s;
+    transition-property: transform;
+    transform: rotate(15deg);
+}
+
+.card {
+	width: 4rem;
+    height: 6rem;
+    padding: 0.4rem;
+    background-color: white;
+    display: inline-block;
+    border-radius: 0.6rem;
+    font-size: 2rem;
+    text-align: center;
+    margin: 3px;
+    border: solid 3px;
+}
+
+.card .symbol {
+	font-size: 36px;
+}
+
+.card.black {
+	color: #000000;
+}
+
+.card.red {
+	color: red;
+}
+
+.minicard {
+    width: 1rem;
+    margin-left: -0.6rem;
+    height: 1.5rem;
+    text-align: center;
+    background-color: white;
+    border: solid 2px #5e5e5e;
+    display: inline-block;
+    border-radius: 0.4rem;
+}
+
+.cardsInHand {
+    margin-left: 0.6rem;
+}
+
+.cardsInHand > :first-child {
+    transform: rotate(-15deg);
+    margin-right: -0.1rem;
+}
+
+.cardsInHand > :last-child {
+    transform: rotate(15deg);
+    margin-top: 0.1rem;
+}
+
+.card.winner {
+	background-color: #c2ffbf;
+}
+
+.card.inactive {
+	background-color: #dedede;
+}
+
+.largeText {
+    font-size: 1.6rem;
+}
+
+.coin {
+    filter: invert(74%) sepia(86%) saturate(2627%) hue-rotate(2deg) brightness(107%) contrast(98%);
+    margin-left: 0.2rem;
+}
+
+.coin.headerImage {
+    margin-left: 0rem;
+    margin-top: 0.4rem;
+}

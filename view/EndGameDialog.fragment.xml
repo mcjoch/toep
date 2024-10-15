@@ -1,0 +1,21 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<Dialog
+		title="{i18n>Game Ended}"
+		busyIndicatorDelay="0"
+		state="Information"
+		contentWidth="80%"
+		contentHeight="80%"
+		class="sapUiContentPadding">
+		<buttons>
+			<Button text="{i18n>playAgain}" press=".onStartNewGame"/>
+			<Button text="{i18n>leave}" press=".onExitGame"/>
+		</buttons>
+		<IllustratedMessage 
+			illustrationSize="Auto"
+			illustrationType="{= ${game>/winner/id} === ${game>/humanPlayer/id} ? 'sapIllus-SuccessBalloon' : 'sapIllus-ErrorScreen' }" 
+			description="{= ${game>/winner/id} === ${game>/humanPlayer/id} ? ('Coins won: ' + ${game>/coins}) : '' } " 
+			title="{game>/winner/name} won!"/>
+	</Dialog>
+</core:FragmentDefinition>

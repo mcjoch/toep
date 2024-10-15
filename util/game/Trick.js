@@ -1,0 +1,2 @@
+"use strict";sap.ui.define([],function(){"use strict";class e{constructor(e){this.cardsPlayed=[];this.no=e}addCard(e){this.cardsPlayed.push(e)}getLeadingSuit(){if(this.cardsPlayed.length===0){return null}return this.cardsPlayed[0].suit}getLeadingCard(){let e=this.cardsPlayed[0];this.cardsPlayed.forEach(t=>{if(t.beats(e)){e=t}});return e}getWinner(){return this.getLeadingCard().player}markWinner(){this.getLeadingCard().setWinner(true);this.getWinner().setWinner(true)}}return e});
+//# sourceMappingURL=Trick.js.map

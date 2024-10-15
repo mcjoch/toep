@@ -1,0 +1,2 @@
+"use strict";sap.ui.define([],function(){"use strict";class s{constructor(){this.cards=[]}addCard(s){this.cards.push(s)}removeCard(s){this.cards=this.cards.filter(r=>r!==s)}getLegalCards(s){const r=this.cards.filter(r=>r.suit===s);if(r.length>0){return r}return this.cards}markLegalCards(s){this.cards.forEach(r=>{r.active=this.getLegalCards(s).includes(r)})}disableAllCards(){this.cards.forEach(s=>{s.active=false})}}return s});
+//# sourceMappingURL=Hand.js.map

@@ -1,0 +1,2 @@
+"use strict";sap.ui.define(["./Game"],function(e){"use strict";function t(e){return e&&e.__esModule&&typeof e.default!=="undefined"?e.default:e}const u=t(e);class n extends u{constructor(){super(null)}refreshViewModel(){return}}return n});
+//# sourceMappingURL=SimulationGame.js.map
