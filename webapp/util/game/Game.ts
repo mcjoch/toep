@@ -19,12 +19,16 @@ export default class Game {
     public currentTrick: Trick;
     public cardsPlayed: Array<Card>;
     public currentPlayer: BasePlayer;
-    private controller: GameController;
-    private deck: Deck;
+    protected controller: GameController;
+    protected deck: Deck;
     protected waitTime: number;
     public coins: number;
     public levelConfig: LevelConfig;
     public winner: BasePlayer;
+    private resolveGameEnded: (winner: BasePlayer) => void;
+    protected simulation: boolean;
+    protected coinSummary: Array<{label: string, coins: number}>
+    protected coinsPaid: number;
 
     /**
      * Constructor function
@@ -44,6 +48,7 @@ export default class Game {
 
         this.cardsPlayed = [];
         this.discardPile = [];
+        this.coinSummary = [];
 
         // Standard wait time between tricks is 4 seconds
         this.waitTime = 4000;
@@ -60,12 +65,13 @@ export default class Game {
         // Create a human player
         const humanPlayer = new HumanPlayer(1);
         this.humanPlayer = humanPlayer;
+        this.coinsPaid = levelConfig.minimumBet;
 
-        // Create the players array
         this.players.push(humanPlayer);
-        this.players.push(new AIPlayer(2, "Player 2"));
-        this.players.push(new AIPlayer(3, "Player 3"));
-        this.players.push(new AIPlayer(4, "Player 4"));
+
+        levelConfig.AIs.forEach((aiConfig) => {
+            this.players.push(new AIPlayer(aiConfig));
+        });
 
         // Take the minimum bet from the player
         StorageManager.setCoins(StorageManager.getCoins() - levelConfig.minimumBet);
@@ -79,7 +85,6 @@ export default class Game {
                 player.dealCard(this.deck.takeCard());
             });
         }
-        this.startGame();
     }
 
     /**
@@ -99,10 +104,16 @@ export default class Game {
 
     /**
      * Starts the game
+     * 
+     * Returns a promise with the game winner
      */
-    public startGame() {
-        this.currentTrick = new Trick(1);
+    public startGame(): Promise<BasePlayer> {
+        this.currentTrick = new Trick(1, this);
         this.setCurrentPlayer(this.getRandomPlayer());
+
+        return new Promise((resolve) => {
+            this.resolveGameEnded = resolve; 
+        });
     }
 
     /**
@@ -131,9 +142,10 @@ export default class Game {
      * Play a card
      */
     private playCard(card: Card) {
-        console.log(`${this.currentPlayer.name} played ${card.getValue()}-${card.getSuit()}`);
 
-        SoundManager.playCardSound();
+        if (!this.isSimulation()) {
+            SoundManager.playCardSound();
+        }
 
         // Add the card to the current trick
         this.currentTrick.addCard(card);
@@ -183,10 +195,8 @@ export default class Game {
             player.setWinner(false);
         });
 
-        console.log(`${trickWinner.name} won trick ${this.currentTrick.no}`);
-
         // Start a new trick
-        this.currentTrick = new Trick(this.currentTrick.no + 1);
+        this.currentTrick = new Trick(this.currentTrick.no + 1, this);
 
         // The winner of the previous trick starts
         this.setCurrentPlayer(trickWinner);
@@ -199,17 +209,29 @@ export default class Game {
     endGame() {
         const gameWinner = this.currentTrick.getWinner();
 
-        if (gameWinner instanceof HumanPlayer) {
-            // Award the player their coins
-            StorageManager.setCoins(StorageManager.getCoins() + this.coins);
+        // If this is not a simulation game, we need to set some properties for the End Game screen.
+        if (!this.isSimulation()) {
+
+            this.winner = gameWinner;
+
+            this.coinSummary.push({label: "Former total", coins: StorageManager.getCoins() + this.coinsPaid});
+            this.coinSummary.push({label: "Bet", coins: -this.coinsPaid});
+    
+            if (gameWinner instanceof HumanPlayer) {
+                // Award the player their coins
+                this.coinSummary.push({label: "Winnings", coins: this.coins});
+                StorageManager.setCoins(StorageManager.getCoins() + this.coins);
+            }
+    
+            this.coinSummary.push({label: "New Total", coins: StorageManager.getCoins()});
+
+            // eslint-disable-next-line @typescript-eslint/no-floating-promises
+            this.controller.openWinnerDialog();
         }
 
-        this.winner = gameWinner;
+        this.resolveGameEnded(gameWinner);
 
-        // eslint-disable-next-line @typescript-eslint/no-floating-promises
-        this.controller.openWinnerDialog();
-
-        console.log(`${gameWinner.name} won the game`);
+       
     }
 
     /**
@@ -227,6 +249,10 @@ export default class Game {
         return this.players[(index + 1) % this.players.length];
     }
 
+    public isSimulation(): boolean {
+        return this.simulation;
+    }
+
 }
 
 export interface LevelConfig {
@@ -235,5 +261,12 @@ export interface LevelConfig {
     subtitle: string,
     minimumBet: number,
     minimumToPlay: number,
-    AIDescription: string
+    AIDescription: string,
+    AIs: Array<AIConfig>
+}
+
+export interface AIConfig {
+    key: number;
+    name: string,
+    AI: string
 }

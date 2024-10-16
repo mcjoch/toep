@@ -22,7 +22,6 @@
 			<Text text="{viewModel>/playerName}" class="largeText sapUiLargeMarginEnd"/>
 			<Text text="{viewModel>/playerCoins}" class="largeText"/>
 			<Image src="img/coin.svg" width="1.7rem" class="coin"/>
-
 		</HBox>
 		<Carousel ariaLabelledBy="carouselTitle" width="350px" class="sapUiContentPadding" arrowsPlacement="PageIndicator" pages="{config>/levels}">
 			<pages>

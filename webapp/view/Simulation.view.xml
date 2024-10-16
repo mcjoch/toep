@@ -1,0 +1,49 @@
+<mvc:View
+	controllerName="com.game.toep.controller.Simulation"
+	displayBlock="true"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+	core:require="{
+		formatter: 'com/game/toep/model/formatter'
+	}">
+
+	<VBox height="100%" width="100%" alignItems="Center" justifyContent="Center">
+        <Title
+            titleStyle="H1"
+            text="{i18n>simulation}"
+            textAlign="Center"
+            class="sapUiLargeMarginBottom cursive"
+        />
+		<Text text="Simulating 1000 games.." class="sapUiSmallMarginBottom" visible="{viewModel>/simulating}"/>
+		<ProgressIndicator
+			class="sapUiSmallMarginBottom"
+			percentValue="{= ${viewModel>/completedRuns} / ${viewModel>/targetRuns} * 100}"
+			displayValue="{viewModel>/completedRuns} of {viewModel>/targetRuns}"
+			showValue="true"
+			width="30rem"
+			state="Success"/>
+		<Table id="resultsTable" items="{viewModel>/aiWins}" busy="{viewModel>/simulating}" width="30rem">
+			<columns>
+				<Column>
+					<Text text="AI" />
+				</Column>
+				<Column>
+					<Text text="Wins" />
+				</Column>
+				<Column>
+					<Text text="Percentage" />
+				</Column>
+			</columns>
+			<items>
+				<ColumnListItem vAlign="Middle">
+					<cells>
+						<Text text="{viewModel>name}" />
+						<Text text="{viewModel>wins}" />
+						<Text text="{viewModel>percentage}%" />
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
+	</VBox>
+</mvc:View>

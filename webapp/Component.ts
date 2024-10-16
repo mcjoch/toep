@@ -1,6 +1,7 @@
 import UIComponent from "sap/ui/core/UIComponent";
 import models from "./model/models";
 import Device from "sap/ui/Device";
+import IllustrationPool from "sap/m/IllustrationPool";
 
 /**
  * @namespace com.game.toep
@@ -21,6 +22,14 @@ export default class Component extends UIComponent {
 
 		// create the views based on the url/hash
 		this.getRouter().initialize();
+
+		const oTntSet = {
+			setFamily: "tnt",
+			setURI: sap.ui.require.toUrl("sap/tnt/themes/base/illustrations")
+		};
+
+		// register tnt illustration set
+		IllustrationPool.registerIllustrationSet(oTntSet, false);
 	}
 
 	/**
