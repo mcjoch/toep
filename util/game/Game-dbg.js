@@ -92,6 +92,7 @@ sap.ui.define(["../StorageManager", "./AIPlayer", "./Deck", "./HumanPlayer", "./
     startGame() {
       this.currentTrick = new Trick(1, this);
       this.setCurrentPlayer(this.getRandomPlayer());
+      this.refreshViewModel();
       return new Promise(resolve => {
         this.resolveGameEnded = resolve;
       });

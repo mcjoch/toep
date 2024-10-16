@@ -111,6 +111,8 @@ export default class Game {
         this.currentTrick = new Trick(1, this);
         this.setCurrentPlayer(this.getRandomPlayer());
 
+        this.refreshViewModel();
+
         return new Promise((resolve) => {
             this.resolveGameEnded = resolve; 
         });
