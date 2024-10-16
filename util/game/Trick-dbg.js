@@ -8,9 +8,10 @@ sap.ui.define([], function () {
    */
 
   class Trick {
-    constructor(no) {
+    constructor(no, game) {
       this.cardsPlayed = [];
       this.no = no;
+      this.game = game;
     }
     addCard(card) {
       this.cardsPlayed.push(card);
@@ -20,6 +21,9 @@ sap.ui.define([], function () {
         return null;
       }
       return this.cardsPlayed[0].suit;
+    }
+    hasLeadingCard() {
+      return this.cardsPlayed.length > 0;
     }
     getLeadingCard() {
       let winner = this.cardsPlayed[0];

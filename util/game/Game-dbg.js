@@ -33,6 +33,7 @@ sap.ui.define(["../StorageManager", "./AIPlayer", "./Deck", "./HumanPlayer", "./
       this.deck.shuffle();
       this.cardsPlayed = [];
       this.discardPile = [];
+      this.coinSummary = [];
 
       // Standard wait time between tricks is 4 seconds
       this.waitTime = 4000;
@@ -48,12 +49,11 @@ sap.ui.define(["../StorageManager", "./AIPlayer", "./Deck", "./HumanPlayer", "./
       // Create a human player
       const humanPlayer = new HumanPlayer(1);
       this.humanPlayer = humanPlayer;
-
-      // Create the players array
+      this.coinsPaid = levelConfig.minimumBet;
       this.players.push(humanPlayer);
-      this.players.push(new AIPlayer(2, "Player 2"));
-      this.players.push(new AIPlayer(3, "Player 3"));
-      this.players.push(new AIPlayer(4, "Player 4"));
+      levelConfig.AIs.forEach(aiConfig => {
+        this.players.push(new AIPlayer(aiConfig));
+      });
 
       // Take the minimum bet from the player
       StorageManager.setCoins(StorageManager.getCoins() - levelConfig.minimumBet);
@@ -67,7 +67,6 @@ sap.ui.define(["../StorageManager", "./AIPlayer", "./Deck", "./HumanPlayer", "./
           player.dealCard(this.deck.takeCard());
         });
       }
-      this.startGame();
     }
 
     /**
@@ -87,10 +86,15 @@ sap.ui.define(["../StorageManager", "./AIPlayer", "./Deck", "./HumanPlayer", "./
 
     /**
      * Starts the game
+     * 
+     * Returns a promise with the game winner
      */
     startGame() {
-      this.currentTrick = new Trick(1);
+      this.currentTrick = new Trick(1, this);
       this.setCurrentPlayer(this.getRandomPlayer());
+      return new Promise(resolve => {
+        this.resolveGameEnded = resolve;
+      });
     }
 
     /**
@@ -118,8 +122,9 @@ sap.ui.define(["../StorageManager", "./AIPlayer", "./Deck", "./HumanPlayer", "./
      * Play a card
      */
     playCard(card) {
-      console.log(`${this.currentPlayer.name} played ${card.getValue()}-${card.getSuit()}`);
-      SoundManager.playCardSound();
+      if (!this.isSimulation()) {
+        SoundManager.playCardSound();
+      }
 
       // Add the card to the current trick
       this.currentTrick.addCard(card);
@@ -165,10 +170,9 @@ sap.ui.define(["../StorageManager", "./AIPlayer", "./Deck", "./HumanPlayer", "./
       this.players.forEach(player => {
         player.setWinner(false);
       });
-      console.log(`${trickWinner.name} won trick ${this.currentTrick.no}`);
 
       // Start a new trick
-      this.currentTrick = new Trick(this.currentTrick.no + 1);
+      this.currentTrick = new Trick(this.currentTrick.no + 1, this);
 
       // The winner of the previous trick starts
       this.setCurrentPlayer(trickWinner);
@@ -179,15 +183,35 @@ sap.ui.define(["../StorageManager", "./AIPlayer", "./Deck", "./HumanPlayer", "./
      */
     endGame() {
       const gameWinner = this.currentTrick.getWinner();
-      if (gameWinner instanceof HumanPlayer) {
-        // Award the player their coins
-        StorageManager.setCoins(StorageManager.getCoins() + this.coins);
-      }
-      this.winner = gameWinner;
 
-      // eslint-disable-next-line @typescript-eslint/no-floating-promises
-      this.controller.openWinnerDialog();
-      console.log(`${gameWinner.name} won the game`);
+      // If this is not a simulation game, we need to set some properties for the End Game screen.
+      if (!this.isSimulation()) {
+        this.winner = gameWinner;
+        this.coinSummary.push({
+          label: "Former total",
+          coins: StorageManager.getCoins() + this.coinsPaid
+        });
+        this.coinSummary.push({
+          label: "Bet",
+          coins: -this.coinsPaid
+        });
+        if (gameWinner instanceof HumanPlayer) {
+          // Award the player their coins
+          this.coinSummary.push({
+            label: "Winnings",
+            coins: this.coins
+          });
+          StorageManager.setCoins(StorageManager.getCoins() + this.coins);
+        }
+        this.coinSummary.push({
+          label: "New Total",
+          coins: StorageManager.getCoins()
+        });
+
+        // eslint-disable-next-line @typescript-eslint/no-floating-promises
+        this.controller.openWinnerDialog();
+      }
+      this.resolveGameEnded(gameWinner);
     }
 
     /**
@@ -203,6 +227,9 @@ sap.ui.define(["../StorageManager", "./AIPlayer", "./Deck", "./HumanPlayer", "./
     getNextPlayer() {
       const index = this.players.indexOf(this.currentPlayer);
       return this.players[(index + 1) % this.players.length];
+    }
+    isSimulation() {
+      return this.simulation;
     }
   }
   return Game;

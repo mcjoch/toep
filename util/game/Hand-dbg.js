@@ -34,6 +34,47 @@ sap.ui.define([], function () {
         card.active = false;
       });
     }
+
+    /**
+     * Checks if any card in the hand can beat the given card
+     */
+    canBeatCard(card) {
+      return this.getLegalCards(card.suit).some(c => c.beats(card));
+    }
+    getLowestLegalCard(leadingsuit) {
+      const possibleCards = this.getLegalCards(leadingsuit);
+      return this.getLowestFromCards(possibleCards);
+    }
+    getHighestLegalCard(leadingsuit) {
+      const possibleCards = this.getLegalCards(leadingsuit);
+      return this.getHighestfromCards(possibleCards);
+    }
+    getWinningCards(leadingCard) {
+      return this.cards.filter(card => card.beats(leadingCard));
+    }
+    getLowestWinningCard(leadingCard) {
+      return this.getLowestFromCards(this.getWinningCards(leadingCard));
+    }
+    getRandomLegalCard(leadingsuit) {
+      const possibleCards = this.getLegalCards(leadingsuit);
+      return possibleCards[Math.floor(Math.random() * possibleCards.length)];
+    }
+    getLowestFromCards(cards) {
+      return cards.reduce((lowestCard, currentCard) => {
+        if (currentCard.getNumericValue() < lowestCard.getNumericValue()) {
+          return currentCard;
+        }
+        return lowestCard;
+      });
+    }
+    getHighestfromCards(cards) {
+      return cards.reduce((highestCard, currentCard) => {
+        if (currentCard.getNumericValue() > highestCard.getNumericValue()) {
+          return currentCard;
+        }
+        return highestCard;
+      });
+    }
   }
   return Hand;
 });

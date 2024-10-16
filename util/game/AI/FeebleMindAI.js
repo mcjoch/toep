@@ -1,0 +1,2 @@
+"use strict";sap.ui.define([],function(){"use strict";class a{constructor(a){this.player=a}pickCardToPlay(a){if(a.hasLeadingCard()&&!this.player.hand.canBeatCard(a.getLeadingCard())){return this.player.hand.getLowestLegalCard(a.getLeadingSuit())}return this.player.hand.getRandomLegalCard(a.getLeadingSuit())}}return a});
+//# sourceMappingURL=FeebleMindAI.js.map

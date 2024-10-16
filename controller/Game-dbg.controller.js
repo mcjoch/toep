@@ -30,6 +30,9 @@ sap.ui.define(["sap/ui/model/json/JSONModel", "./BaseController", "../util/game/
         gameObject.setup(levelConfig);
         const gameModel = this.getModel("game");
         gameModel.setProperty("/", gameObject);
+
+        // eslint-disable-next-line @typescript-eslint/no-floating-promises
+        gameObject.startGame();
       };
       this.onSelectCard = oEvent => {
         const oSource = oEvent.getSource();

@@ -107,6 +107,11 @@
 					"target": "tutorial"
 				},
 				{
+					"pattern": "simulation",
+					"name": "simulation",
+					"target": "simulation"
+				},
+				{
 					"pattern": "game/{level}",
 					"name": "game",
 					"target": "game"
@@ -136,6 +141,10 @@
 				"game": {
 					"viewId": "game",
 					"viewName": "Game"
+				},
+				"simulation": {
+					"viewId": "simulation",
+					"viewName": "Simulation"
 				}
 			}
 		}

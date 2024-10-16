@@ -11,12 +11,8 @@ sap.ui.define([], function () {
       this.player = player;
     }
     pickCardToPlay(trick) {
-      // Get the card from the user
-      const possibleCards = this.player.hand.getLegalCards(trick.getLeadingSuit());
-
       // Pick a random card
-      const card = possibleCards[Math.floor(Math.random() * possibleCards.length)];
-      return card;
+      return this.player.hand.getRandomLegalCard(trick.getLeadingSuit());
     }
   }
   return RandomAI;

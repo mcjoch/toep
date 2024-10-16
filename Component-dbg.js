@@ -1,6 +1,6 @@
 "use strict";
 
-sap.ui.define(["sap/ui/core/UIComponent", "./model/models", "sap/ui/Device"], function (UIComponent, __models, Device) {
+sap.ui.define(["sap/ui/core/UIComponent", "./model/models", "sap/ui/Device", "sap/m/IllustrationPool"], function (UIComponent, __models, Device, IllustrationPool) {
   "use strict";
 
   function _interopRequireDefault(obj) {
@@ -23,6 +23,13 @@ sap.ui.define(["sap/ui/core/UIComponent", "./model/models", "sap/ui/Device"], fu
 
       // create the views based on the url/hash
       this.getRouter().initialize();
+      const oTntSet = {
+        setFamily: "tnt",
+        setURI: sap.ui.require.toUrl("sap/tnt/themes/base/illustrations")
+      };
+
+      // register tnt illustration set
+      IllustrationPool.registerIllustrationSet(oTntSet, false);
     },
     /**
      * This method can be called to determine whether the sapUiSizeCompact or sapUiSizeCozy

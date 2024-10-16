@@ -1,0 +1,2 @@
+"use strict";sap.ui.define([],function(){"use strict";class e{constructor(e){this.player=e}pickCardToPlay(e){if(!e.hasLeadingCard()){if(e.no===1||e.no===2){return this.player.hand.getLowestLegalCard(null)}else{return this.player.hand.getHighestLegalCard(null)}}if(!this.player.hand.canBeatCard(e.getLeadingCard())){return this.player.hand.getLowestLegalCard(e.getLeadingSuit())}else{return this.player.hand.getLowestWinningCard(e.getLeadingCard())}}}return e});
+//# sourceMappingURL=ReasoningAI.js.map

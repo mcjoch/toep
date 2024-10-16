@@ -93,4 +93,8 @@ export default class Menu extends BaseController {
 	onPressCredits(): void {
 		this.getRouter().navTo("credits");
 	}
+
+	onPressSimulation(): void {
+		this.getRouter().navTo("simulation");
+	}
 }

@@ -81,6 +81,9 @@ sap.ui.define(["./BaseController", "sap/m/Text", "sap/m/Button", "sap/m/Dialog",
     },
     onPressCredits: function _onPressCredits() {
       this.getRouter().navTo("credits");
+    },
+    onPressSimulation: function _onPressSimulation() {
+      this.getRouter().navTo("simulation");
     }
   });
   return Menu;

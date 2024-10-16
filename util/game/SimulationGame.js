@@ -1,2 +1,2 @@
-"use strict";sap.ui.define(["./Game"],function(e){"use strict";function t(e){return e&&e.__esModule&&typeof e.default!=="undefined"?e.default:e}const u=t(e);class n extends u{constructor(){super(null)}refreshViewModel(){return}}return n});
+"use strict";sap.ui.define(["./AIPlayer","./Game"],function(e,t){"use strict";function s(e){return e&&e.__esModule&&typeof e.default!=="undefined"?e.default:e}const r=s(e);const u=s(t);class i extends u{constructor(){super(null);this.simulation=true;this.waitTime=0}refreshViewModel(){return}setup(e){e.AIs.forEach(e=>{this.players.push(new r(e))});for(let e=0;e<4;e++){this.players.forEach(e=>{e.dealCard(this.deck.takeCard())})}}}return i});
 //# sourceMappingURL=SimulationGame.js.map

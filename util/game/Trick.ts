@@ -4,15 +4,18 @@
 
 import BasePlayer from "./BasePlayer";
 import Card from "./Card";
+import Game from "./Game";
 
 export default class Trick {
 
     public cardsPlayed: Array<Card>;
     public no: number;
+    public game: Game;
 
-    constructor(no: number) {
+    constructor(no: number, game: Game) {
         this.cardsPlayed = [];
         this.no = no;
+        this.game = game;
     }
 
     public addCard(card: Card) {
@@ -24,6 +27,10 @@ export default class Trick {
             return null;
         }
         return this.cardsPlayed[0].suit;
+    }
+
+    public hasLeadingCard(): boolean {
+        return this.cardsPlayed.length > 0;
     }
 
     public getLeadingCard(): Card {

@@ -6,7 +6,24 @@
             "subtitle": "The journey begins",
             "minimumBet": 1,
             "minimumToPlay": 5,
-            "AIDescription": "Opponents are beginners and will make many mistakes."
+            "AIDescription": "Opponents are beginners and will make many mistakes.",
+            "AIs": [
+                {
+                    "key": 2,
+                    "name": "Shirley",
+                    "AI": "FeebleMindAI"
+                },
+                {
+                    "key": 3,
+                    "name": "Derek",
+                    "AI": "RandomAI"
+                },
+                {
+                    "key": 4,
+                    "name": "Ben",
+                    "AI": "RandomAI"
+                }
+            ]
         },
         {
             "key": 2,
@@ -14,7 +31,24 @@
             "subtitle": "The road to toep mastery",
             "minimumBet": 5,
             "minimumToPlay": 20,
-            "AIDescription": "Opponents play well, but make mistakes."
+            "AIDescription": "Opponents play well, but make mistakes.",
+            "AIs": [
+                {
+                    "key": 2,
+                    "name": "Mark",
+                    "AI": "ReasoningAI"
+                },
+                {
+                    "key": 3,
+                    "name": "Cathy",
+                    "AI": "FeebleMindAI"
+                },
+                {
+                    "key": 4,
+                    "name": "Greg",
+                    "AI": "FeebleMindAI"
+                }
+            ]
         },
         {
             "key": 3,
@@ -22,7 +56,24 @@
             "subtitle": "Where toep legends are made",
             "minimumBet": 10,
             "minimumToPlay": 100,
-            "AIDescription": "Opponents try to play optimally."
+            "AIDescription": "Opponents try to play optimally.",
+            "AIs": [
+                {
+                    "key": 2,
+                    "name": "Mark",
+                    "AI": "ReasoningAI"
+                },
+                {
+                    "key": 3,
+                    "name": "Andrew",
+                    "AI": "ReasoningAI"
+                },
+                {
+                    "key": 4,
+                    "name": "Jaap",
+                    "AI": "ReasoningAI"
+                }
+            ]
         }
 
     ]

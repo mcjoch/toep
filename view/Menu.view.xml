@@ -19,7 +19,7 @@
         <Button text="{i18n>newGame}" width="300px" icon="sap-icon://add" press=".onPressNewGame"/>
         <Button text="{i18n>tutorial}" width="300px" icon="sap-icon://learning-assistant" press=".onPressTutorial"/>
         <Button text="{i18n>credits}" width="300px" icon="sap-icon://group" press=".onPressCredits"/>
-		<Button text="{i18n>simulation}" width="300px" icon="sap-icon://simulate" press=".onPressSimulation" enabled="false"/>
+		<Button text="{i18n>simulation}" width="300px" icon="sap-icon://simulate" press=".onPressSimulation" enabled="true"/>
         <Text text="{i18n>builtInUI5}" class="sapUiLargeMarginTop"/>
 	</VBox>
 </mvc:View>

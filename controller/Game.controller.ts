@@ -44,6 +44,9 @@ export default class Game extends BaseController {
 
         gameModel.setProperty("/", gameObject);
 
+        // eslint-disable-next-line @typescript-eslint/no-floating-promises
+        gameObject.startGame();
+
     }
 
     public modelRefresh() {
