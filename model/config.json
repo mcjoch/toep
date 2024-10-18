@@ -29,8 +29,8 @@
             "key": 2,
             "title": "Intermediate",
             "subtitle": "The road to toep mastery",
-            "minimumBet": 5,
-            "minimumToPlay": 20,
+            "minimumBet": 2,
+            "minimumToPlay": 15,
             "AIDescription": "Opponents play well, but make mistakes.",
             "AIs": [
                 {
@@ -54,19 +54,19 @@
             "key": 3,
             "title": "Master",
             "subtitle": "Where toep legends are made",
-            "minimumBet": 10,
-            "minimumToPlay": 100,
+            "minimumBet": 5,
+            "minimumToPlay": 30,
             "AIDescription": "Opponents try to play optimally.",
             "AIs": [
                 {
                     "key": 2,
                     "name": "Mark",
-                    "AI": "ReasoningAI"
+                    "AI": "CardCounterAI"
                 },
                 {
                     "key": 3,
                     "name": "Andrew",
-                    "AI": "ReasoningAI"
+                    "AI": "CardCounterAI"
                 },
                 {
                     "key": 4,

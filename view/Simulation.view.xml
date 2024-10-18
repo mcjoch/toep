@@ -15,23 +15,23 @@
             textAlign="Center"
             class="sapUiLargeMarginBottom cursive"
         />
-		<Text text="Simulating 1000 games.." class="sapUiSmallMarginBottom" visible="{viewModel>/simulating}"/>
+		<Text text="Simulating {viewModel>/targetRuns} games.." class="sapUiSmallMarginBottom" visible="{viewModel>/simulating}"/>
 		<ProgressIndicator
 			class="sapUiSmallMarginBottom"
 			percentValue="{= ${viewModel>/completedRuns} / ${viewModel>/targetRuns} * 100}"
 			displayValue="{viewModel>/completedRuns} of {viewModel>/targetRuns}"
 			showValue="true"
-			width="30rem"
+			width="20rem"
 			state="Success"/>
-		<Table id="resultsTable" items="{viewModel>/aiWins}" busy="{viewModel>/simulating}" width="30rem">
+		<Table id="resultsTable" items="{viewModel>/aiWins}" busy="{viewModel>/simulating}" width="20rem">
 			<columns>
 				<Column>
 					<Text text="AI" />
 				</Column>
-				<Column>
+				<Column width="5rem">
 					<Text text="Wins" />
 				</Column>
-				<Column>
+				<Column width="6rem">
 					<Text text="Percentage" />
 				</Column>
 			</columns>

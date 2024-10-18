@@ -41,6 +41,7 @@ sap.ui.define(["./Card"], function (__Card) {
       // Take a card and remove it from the Deck
       return this.cards.pop();
     }
+    getCards = () => this.cards;
   }
   return Deck;
 });

@@ -17,7 +17,6 @@ export default class Game {
     public humanPlayer: HumanPlayer;
     public discardPile: Array<Card>;
     public currentTrick: Trick;
-    public cardsPlayed: Array<Card>;
     public currentPlayer: BasePlayer;
     protected controller: GameController;
     protected deck: Deck;
@@ -46,7 +45,6 @@ export default class Game {
         // shuffle the deck
         this.deck.shuffle();
 
-        this.cardsPlayed = [];
         this.discardPile = [];
         this.coinSummary = [];
 
@@ -182,6 +180,9 @@ export default class Game {
      * Ends the trick
      */
     private endTrick() {
+
+        // Add the cards played to the discard pile
+        this.discardPile = this.discardPile.concat(this.currentTrick.cardsPlayed);
 
         // If this was the last trick, end the game
         if (this.currentTrick.no === 4) {

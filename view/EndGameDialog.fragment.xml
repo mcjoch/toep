@@ -5,39 +5,40 @@
 		title="{i18n>Game Ended}"
 		busyIndicatorDelay="0"
 		state="Information"
-		contentWidth="80%"
-		contentHeight="80%"
+		contentWidth="25rem"
+		contentHeight="40rem"
 		class="sapUiContentPadding">
 		<buttons>
 			<Button text="{i18n>playAgain}" press=".onStartNewGame" icon="sap-icon://media-play" type="Emphasized"/>
 			<Button text="{i18n>leave}" press=".onExitGame" icon="sap-icon://system-exit"/>
 		</buttons>
-		<IllustratedMessage 
-			illustrationSize="Auto"
-			illustrationType="{= ${game>/winner/id} === ${game>/humanPlayer/id} ? 'tnt-Mission' : 'tnt-MissionFailed' }" 
-			description="{= ${game>/winner/id} === ${game>/humanPlayer/id} ? ('Coins won: ' + ${game>/coins}) : '' } " 
-			title="{game>/winner/name} won!"/>
+		<content>
+			<IllustratedMessage 
+				illustrationSize="Auto"
+				illustrationType="{= ${game>/winner/id} === ${game>/humanPlayer/id} ? 'tnt-Mission' : 'tnt-MissionFailed' }" 
+				description="{= ${game>/winner/id} === ${game>/humanPlayer/id} ? ('Coins won: ' + ${game>/coins}) : '' } " 
+				title="{game>/winner/name} won!"/>
 
-		<VBox height="100%" width="100%" alignItems="Center" justifyContent="Center">
-		<Table id="gameEndTable" items="{game>/coinSummary}" width="20rem">
-			<columns>
-				<Column>
-				</Column>
-				<Column>
-				</Column>
-			</columns>
-			<items>
-				<ColumnListItem vAlign="Middle">
-					<cells>
-						<Text text="{game>label}" />
-						<HBox alignItems="Center" justifyContent="End">
-							<Text text="{game>coins}" />
-							<Image src="img/coin.svg" width="1.4rem" height="1.4rem" class="coin headerImage"/>
-						</HBox>
-					</cells>
-				</ColumnListItem>
-			</items>
-		</Table>
-		</VBox>
+				<Table id="gameEndTable" items="{game>/coinSummary}" width="20rem">
+					<columns>
+						<Column>
+						</Column>
+						<Column>
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem vAlign="Middle">
+							<cells>
+								<Text text="{game>label}" />
+								<HBox alignItems="Center" justifyContent="End">
+									<Text text="{game>coins}" />
+									<Image src="img/coin.svg" width="1.4rem" height="1.4rem" class="coin headerImage"/>
+								</HBox>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+		</content>
+		
 	</Dialog>
 </core:FragmentDefinition>

@@ -15,6 +15,7 @@ sap.ui.define(["sap/ui/model/json/JSONModel", "./BaseController", "../util/game/
     constructor: function constructor() {
       BaseController.prototype.constructor.apply(this, arguments);
       this.aiWins = [];
+      this.completedRuns = 0;
       this.onRouteMatched = () => {
         // Pass the level config to the Game Manager
         const simulationConfig = this.getSimulationConfig();
@@ -30,7 +31,7 @@ sap.ui.define(["sap/ui/model/json/JSONModel", "./BaseController", "../util/game/
         });
         viewModel.setProperty("/aiWins", this.aiWins);
 
-        // Run the simulation game 10 times
+        // Run the simulation games
         this.runGames().then(() => {
           this.calculateWinPercentages();
           viewModel.setProperty("/simulating", false);
@@ -50,7 +51,7 @@ sap.ui.define(["sap/ui/model/json/JSONModel", "./BaseController", "../util/game/
       this.getRouter().getRoute("simulation").attachPatternMatched(this.onRouteMatched, this);
       const viewModel = new JSONModel({
         completedRuns: 0,
-        targetRuns: 1000,
+        targetRuns: 10000,
         simulating: true,
         aiWins: []
       });
@@ -67,11 +68,23 @@ sap.ui.define(["sap/ui/model/json/JSONModel", "./BaseController", "../util/game/
     updateWinCount: function _updateWinCount(winner) {
       this.aiWins[winner - 1].wins++;
     },
-    runGames: async function _runGames() {
+    runGames: function _runGames() {
       const viewModel = this.getModel("viewModel");
+      this.completedRuns = 0;
+      const promises = [];
+
+      // Run 10 simulation games in parallel
+      for (let j = 0; j < 20; j++) {
+        promises.push(this.runGamesBatch(500));
+      }
+      return Promise.all(promises);
+    },
+    runGamesBatch: async function _runGamesBatch(num) {
+      const viewModel = this.getModel("viewModel");
+      this.completedRuns = 0;
 
       // Run the simulation game 10 times
-      for (let i = 0; i < 1000; i++) {
+      for (let i = 0; i < num; i++) {
         // Pass the level config to the Game Manager
         const simulationConfig = this.getSimulationConfig();
 
@@ -81,7 +94,8 @@ sap.ui.define(["sap/ui/model/json/JSONModel", "./BaseController", "../util/game/
         // Start the simGame
         const winner = await simGame.startGame();
         this.updateWinCount(winner.id);
-        viewModel.setProperty("/completedRuns", i + 1);
+        this.completedRuns++;
+        viewModel.setProperty("/completedRuns", this.completedRuns);
       }
     },
     getSimulationConfig: function _getSimulationConfig() {
@@ -94,20 +108,20 @@ sap.ui.define(["sap/ui/model/json/JSONModel", "./BaseController", "../util/game/
         "AIDescription": "",
         AIs: [{
           key: 1,
-          name: "Random AI 1",
+          name: "Random AI",
           AI: "RandomAI"
         }, {
           key: 2,
-          name: "Random AI 2",
-          AI: "RandomAI"
-        }, {
-          key: 3,
           name: "Feeble Mind AI",
           AI: "FeebleMindAI"
         }, {
-          key: 4,
+          key: 3,
           name: "Reasoning AI",
           AI: "ReasoningAI"
+        }, {
+          key: 4,
+          name: "Card Counter AI",
+          AI: "CardCounterAI"
         }]
       };
     }

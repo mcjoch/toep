@@ -1,4 +1,5 @@
 import AIInterface from "./AI/AIInterface";
+import CardCounterAI from "./AI/CardCounterAI";
 import FeebleMindAI from "./AI/FeebleMindAI";
 import RandomAI from "./AI/RandomAI";
 import ReasoningAI from "./AI/ReasoningAI";
@@ -28,6 +29,9 @@ export default class AIPlayer extends BasePlayer {
             case "ReasoningAI":
                 this.AI = new ReasoningAI(this);
                 break;
+            case "CardCounterAI":
+                this.AI = new CardCounterAI(this);
+                break;
             default:
                 throw new Error(`Invalid AI choice: ${config.AI}`);
         }
@@ -37,6 +41,10 @@ export default class AIPlayer extends BasePlayer {
         return new Promise((resolve, reject) => {
             // Pick the first card for now
             const card = this.AI.pickCardToPlay(trick);
+
+            if (!card) {
+                reject(new Error("No card was chosen"));
+            }
 
             // No delay in simulation games
             if (trick.game.isSimulation()) {

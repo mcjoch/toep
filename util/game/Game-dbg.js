@@ -31,7 +31,6 @@ sap.ui.define(["../StorageManager", "./AIPlayer", "./Deck", "./HumanPlayer", "./
 
       // shuffle the deck
       this.deck.shuffle();
-      this.cardsPlayed = [];
       this.discardPile = [];
       this.coinSummary = [];
 
@@ -158,6 +157,9 @@ sap.ui.define(["../StorageManager", "./AIPlayer", "./Deck", "./HumanPlayer", "./
      * Ends the trick
      */
     endTrick() {
+      // Add the cards played to the discard pile
+      this.discardPile = this.discardPile.concat(this.currentTrick.cardsPlayed);
+
       // If this was the last trick, end the game
       if (this.currentTrick.no === 4) {
         this.endGame();

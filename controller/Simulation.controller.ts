@@ -12,13 +12,14 @@ import Control from "sap/ui/core/Control";
 export default class Simulation extends BaseController {
 
     private aiWins: AIWins[] = [];
+    private completedRuns = 0;
     
     public onInit(): void {
         this.getRouter().getRoute("simulation").attachPatternMatched(this.onRouteMatched, this);
 
         const viewModel = new JSONModel({
             completedRuns: 0,
-            targetRuns: 1000,
+            targetRuns: 10000,
             simulating: true,
             aiWins: [],
         });
@@ -37,7 +38,7 @@ export default class Simulation extends BaseController {
         });
         viewModel.setProperty("/aiWins", this.aiWins);
 
-        // Run the simulation game 10 times
+        // Run the simulation games
         this.runGames().then(() => {
             this.calculateWinPercentages();
             viewModel.setProperty("/simulating", false);
@@ -61,11 +62,26 @@ export default class Simulation extends BaseController {
         this.aiWins[winner - 1].wins++;
      }
 
-     private async runGames(): Promise<void> {
+     private runGames(): Promise<void[]> {
         const viewModel = this.getModel("viewModel") as JSONModel;
+        this.completedRuns = 0;
+        const promises = [];
+
+        // Run 10 simulation games in parallel
+        for (let j = 0; j < 20; j++) {
+            promises.push(this.runGamesBatch(500));
+        }
+
+        return Promise.all(promises);
+        
+     }
+
+     private async runGamesBatch(num: number): Promise<void> {
+        const viewModel = this.getModel("viewModel") as JSONModel;
+        this.completedRuns = 0;
 
         // Run the simulation game 10 times
-        for (let i = 0; i < 1000; i++) {
+        for (let i = 0; i < num; i++) {
             // Pass the level config to the Game Manager
             const simulationConfig = this.getSimulationConfig();
 
@@ -75,9 +91,13 @@ export default class Simulation extends BaseController {
             // Start the simGame
             const winner: BasePlayer = await simGame.startGame();
             this.updateWinCount(winner.id);
-            viewModel.setProperty("/completedRuns", i + 1);
+            this.completedRuns++;
+            viewModel.setProperty("/completedRuns", this.completedRuns);
         }
+        
      }
+
+
 
      public setupSimulationGame = (simulationConfig: LevelConfig): SimulationGame => {
         const gameObject = new SimulationGame();
@@ -96,10 +116,11 @@ export default class Simulation extends BaseController {
             "minimumToPlay": 0,
             "AIDescription": "",
             AIs: [
-                { key: 1, name: "Random AI 1", AI: "RandomAI" },
-                { key: 2, name: "Random AI 2", AI: "RandomAI" },
-                { key: 3, name: "Feeble Mind AI", AI: "FeebleMindAI" },
-                { key: 4, name: "Reasoning AI", AI: "ReasoningAI" }
+                { key: 1, name: "Random AI", AI: "RandomAI" },
+                { key: 2, name: "Feeble Mind AI", AI: "FeebleMindAI" },
+                { key: 3, name: "Reasoning AI", AI: "ReasoningAI" },
+                { key: 4, name: "Card Counter AI", AI: "CardCounterAI" }
+                
             ]
         }
     }

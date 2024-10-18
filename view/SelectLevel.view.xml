@@ -32,11 +32,11 @@
 					<f:content>
 						<VBox height="110px" class="sapUiSmallMargin" justifyContent="SpaceBetween">
 							<HBox>
-								<Text text="Ante: {config>minimumBet}"/>
+								<Text text="Starting bet: {config>minimumBet}"/>
 								<Image src="img/coin.svg" width="0.9rem" class="coin"/>
 							</HBox>
 							<HBox>
-								<Text text="Minimum coins to unlock: {config>minimumToPlay}"/>
+								<Text text="Minimum coins to play: {config>minimumToPlay}"/>
 								<Image src="img/coin.svg" width="0.9rem" class="coin"/>
 							</HBox>
 							<Button text="{i18n>start}" type="Emphasized" press=".onPressStart" enabled="{= ${viewModel>/playerCoins} >= ${config>minimumToPlay} }"/>

@@ -1,11 +1,12 @@
 "use strict";
 
-sap.ui.define(["./AI/FeebleMindAI", "./AI/RandomAI", "./AI/ReasoningAI", "./BasePlayer"], function (__FeebleMindAI, __RandomAI, __ReasoningAI, __BasePlayer) {
+sap.ui.define(["./AI/CardCounterAI", "./AI/FeebleMindAI", "./AI/RandomAI", "./AI/ReasoningAI", "./BasePlayer"], function (__CardCounterAI, __FeebleMindAI, __RandomAI, __ReasoningAI, __BasePlayer) {
   "use strict";
 
   function _interopRequireDefault(obj) {
     return obj && obj.__esModule && typeof obj.default !== "undefined" ? obj.default : obj;
   }
+  const CardCounterAI = _interopRequireDefault(__CardCounterAI);
   const FeebleMindAI = _interopRequireDefault(__FeebleMindAI);
   const RandomAI = _interopRequireDefault(__RandomAI);
   const ReasoningAI = _interopRequireDefault(__ReasoningAI);
@@ -28,6 +29,9 @@ sap.ui.define(["./AI/FeebleMindAI", "./AI/RandomAI", "./AI/ReasoningAI", "./Base
         case "ReasoningAI":
           this.AI = new ReasoningAI(this);
           break;
+        case "CardCounterAI":
+          this.AI = new CardCounterAI(this);
+          break;
         default:
           throw new Error(`Invalid AI choice: ${config.AI}`);
       }
@@ -36,6 +40,9 @@ sap.ui.define(["./AI/FeebleMindAI", "./AI/RandomAI", "./AI/ReasoningAI", "./Base
       return new Promise((resolve, reject) => {
         // Pick the first card for now
         const card = this.AI.pickCardToPlay(trick);
+        if (!card) {
+          reject(new Error("No card was chosen"));
+        }
 
         // No delay in simulation games
         if (trick.game.isSimulation()) {

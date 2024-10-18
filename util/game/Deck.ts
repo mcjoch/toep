@@ -37,4 +37,6 @@ export default class Deck {
         // Take a card and remove it from the Deck
         return this.cards.pop();
     }
+
+    getCards: () => Array<Card> = () => this.cards;
 }
